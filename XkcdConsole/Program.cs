@@ -14,8 +14,18 @@ web.BaseAddress = new Uri("https://xkcd.com/");
 // set up a connection with a path 
 var connection = await web.GetAsync($"{input}/info.0.json");
 
-// Connect to the server and create a class with the data returned
-Comic com = await connection.Content.ReadAsAsync<Comic>();
+try
+{
+    // Connect to the server and create a class with the data returned
+    Comic com = await connection.Content.ReadAsAsync<Comic>();
+
+    Console.WriteLine(com.alt);
+    Console.WriteLine(com.img);
+}
+catch (Exception e)
+{
+    Console.WriteLine(e.Message);
+}
 
 
 //// communicate with the server and return a string 
@@ -25,8 +35,7 @@ Comic com = await connection.Content.ReadAsAsync<Comic>();
 
 
 
-Console.WriteLine(com.alt);
-Console.WriteLine(com.img);
+
 
 
 class Comic
